@@ -1,0 +1,37 @@
+import React from 'react';
+
+const SongInput=({input,setInput,playlists,setPlaylists})=>{
+
+    
+    const handleChange=(e)=>{
+        setInput(e.target.value);
+    }
+    
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if(input===''){
+            return;
+        }
+        setPlaylists([...playlists,{
+            title:input, //얘가 input과 playlist를 이어주는거지
+            count:0,
+            id:Math.random()*1000,
+        }]);
+        //[{title: , count:0, id:xxx}]
+        setInput('');
+    }
+
+    return(
+        <>       
+            <form onSubmit={handleSubmit}>
+                <input value={input} onChange={handleChange}></input>
+                <button>
+                    <i className="fas fa-check"></i>
+                </button>
+            </form>
+            <span>{input}</span>
+        </>
+    )
+}
+
+export default SongInput;
