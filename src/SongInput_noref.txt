@@ -1,8 +1,7 @@
-import React,{useRef} from 'react';
+import React from 'react';
 
-const SongInput=({input,setInput,playlists,setPlaylists})=>{
+const SongInput_noref=({input,setInput,playlists,setPlaylists})=>{
 
-    const inputRef=useRef('');
     
     const handleChange=(e)=>{
         setInput(e.target.value);
@@ -14,18 +13,18 @@ const SongInput=({input,setInput,playlists,setPlaylists})=>{
             return;
         }
         setPlaylists([...playlists,{
-            title:inputRef.current.value, //얘가 input과 playlist를 이어주는거지
+            title:input, //얘가 input과 playlist를 이어주는거지
             count:0,
             id:Math.random()*1000,
         }]);
         //[{title: , count:0, id:xxx}]
-        inputRef.current.value='';
+        setInput('');
     }
 
     return(
         <>       
             <form onSubmit={handleSubmit}>
-                <input ref={inputRef} onChange={handleChange}></input>
+                <input value={input} onChange={handleChange}></input>
                 <button>
                     <i className="fas fa-check"></i>
                 </button>
@@ -35,4 +34,4 @@ const SongInput=({input,setInput,playlists,setPlaylists})=>{
     )
 }
 
-export default SongInput;
+export default SongInput_noref;
